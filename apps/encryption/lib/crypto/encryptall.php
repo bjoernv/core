@@ -140,6 +140,17 @@ class EncryptAll {
 		$this->output->writeln('');
 		$this->createKeyPairs();
 
+		//send-out or display password list and write it to a file
+		//do this before encryption of all user files, because
+		//this long-running action can abort with an error or by
+		//user request
+		$this->output->writeln("\n");
+		$this->output->writeln('Generated encryption key passwords');
+		$this->output->writeln('----------------------------------');
+		$this->output->writeln('');
+		$this->outputPasswords();
+		$this->output->writeln("\n");
+
 		//setup users file system and encrypt all files one by one (take should encrypt setting of storage into account)
 		$this->output->writeln("\n");
 		$this->output->writeln('Start to encrypt users files');
@@ -147,6 +158,9 @@ class EncryptAll {
 		$this->output->writeln('');
 		$this->encryptAllUsersFiles();
 		//send-out or display password list and write it to a file
+		//do this before encryption of all user files, because
+		//this long-running action can abort with an error or by
+		//user request
 		$this->output->writeln("\n");
 		$this->output->writeln('Generated encryption key passwords');
 		$this->output->writeln('----------------------------------');
